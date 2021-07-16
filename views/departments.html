@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% set title = 'Departments'%}
+{% block content %}
+
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <form class="row g-3">
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-secondary mb-3">Confirm identity</button>
+            <button type="button" class="btn btn-success mb-3">
+              <a href="/add-departments">Add Department</a>
+              </button>
+          </div>
+        </form>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Department Name</th>
+            <th scope="col">Building</th>
+            <th scope="col">Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for department in dataList %}
+            <tr>
+              <th scope="row">{{department.dept_name}}</th>
+              <td>{{department.building}}</td>
+              <td>{{department.budget}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+{% endblock %}

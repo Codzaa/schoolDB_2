@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% set title = 'New Instructor'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addinstructors" method="post">
+  <div class="mb-3">
+    <label for="id" class="form-label">Instructor Id</label>
+    <input
+      type="number"
+      name="id"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Instructor Name</label>
+    <input
+      type="text"
+      name="name"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Department Name</label>
+    <select class="form-select" aria-label="Default select example" name="dept_name">
+      {% for department in dataList%}
+        <option value={{department.dept_name}}>{{department.dept_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Salary</label>
+    <input
+      type="number"
+      name="salary"
+      class="form-control"
+      >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/students">Back</a></button>
+</form>
+
+{% endblock %}

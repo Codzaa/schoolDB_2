@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% set title = 'New Department'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/adddepartments" method="post">
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Department Name</label>
+    <input
+      type="text"
+      name="dept_name"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Building</label>
+    <input
+      type="text"
+      name="building"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Budget</label>
+    <input
+      type="number"
+      name="budget"
+      class="form-control"
+      >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/departments">Cancel</a></button>
+</form>
+
+{% endblock %}

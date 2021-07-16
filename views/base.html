@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="assets/bootstrap5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+          <div class="container">
+            <a href="#" class="navbar-brand">Student Database</a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navmenu"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navmenu">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/students" class="nav-link">Students</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/courses" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/instructors" class="nav-link">Instructors</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/departments" class="nav-link">Departments</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/advisors" class="nav-link">Advisors</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/takes" class="nav-link">Takes</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/resultset" class="nav-link">Result Set</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/failedstudents" class="nav-link">Failed Grades No.1-3</a>
+                </li>
+
+
+
+              </ul>
+            </div>
+          </div>
+        </nav>
+    <!-- End Of Navbar-->
+    <h1 class="text-center" style = "margin-top:100px">{{title}}</h1>
+
+    <div class="container" style = "margin-top:80px">
+      <div class="row justify-content-center">
+
+    {% block content %}{% endblock %}
+
+      </div>
+    </div>
+
+
+    <script src="assets/bootstrap5.0.1/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="assets/js/socket.io.min.js" ></script>
+  </body>
+</html>
