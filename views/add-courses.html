@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% set title = 'New Course'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addcourses" method="post">
+  <div class="mb-3">
+    <label for="id" class="form-label">Course Id</label>
+    <input
+      type="number"
+      name="course_id"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Course title</label>
+    <input
+      type="text"
+      name="title"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Department Name</label>
+    <select class="form-select" aria-label="Default select example" name="dept_name">
+      {% for department in dataList%}
+        <option value={{department.dept_name}}>{{department.dept_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Credits</label>
+    <input
+      type="number"
+      name="credits"
+      class="form-control"
+      >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/courses">Back</a></button>
+</form>
+
+{% endblock %}

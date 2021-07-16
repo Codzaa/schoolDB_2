@@ -225,8 +225,14 @@ class SQL_C {
     var checker;
     //Switch case for Selecting the correct SQL Statement for the correct Table
     switch (table) {
+      case "prereqs":
+        checker = `SELECT * FROM ${table} WHERE course_id = '${record.course_id}'`;
+      case "courses":
+        checker =`SELECT * FROM ${table} WHERE course_id = '${record.course_id}'`;
+        break;
       case "advsiors":
         checker =`SELECT * FROM ${table} WHERE s_ID = '${record.s_ID}'`;
+        break;
       case "departments":
         checker = `SELECT * FROM ${table} WHERE dept_name = '${record.dept_name}'`;
         break;
@@ -276,21 +282,18 @@ class SQL_C {
     var query,query2;
     switch (page) {
       case "add-advisors":
-        console.log(page);
         var studentsList,instructorsList;
         query = `SELECT * FROM students`;
         query2 = `SELECT * FROM instructors`;
         //SQL Query for getting the Students List
         this.con.query(query,(err,result)=>{
           if(err) throw err;
-          //res.render(`${page}.html`,{dataList:result});
           studentsList = result;
         });
         //SQL Query for getting the Instructors List
         this.con.query(query2,(err,result)=>{
           if(err) throw err;
           res.render(`${page}.html`,{studentsList:studentsList,instructorsList:result})
-          console.log(studentsList,result);
         });
         break;
       default:

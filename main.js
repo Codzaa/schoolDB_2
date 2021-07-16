@@ -86,6 +86,26 @@ app.get("/add-advisors",(req,res)=>{
   //Get The Add Advisor Page
   sqlObj.getPage_F("add-advisors",res,"departments");
 });
+//Get Request for all Courses
+app.get("/courses",(req,res)=>{
+  //Get All Courses from Database
+  sqlObj.getAllRec_F("courses",res);
+});
+//Get Request for the Add Course Page
+app.get("/add-courses",(req,res)=>{
+  //Get The Add Course Page
+  sqlObj.getPage_F("add-courses",res,"departments");
+});
+//Get Request for all Prereqs
+app.get("/prereqs",(req,res)=>{
+  //Get All Prereqs from Database
+  sqlObj.getAllRec_F("prereqs",res);
+});
+//Get Request for the Add Prereq Page
+app.get("/add-prereqs",(req,res)=>{
+  //Get The Add Prereqs Page
+  sqlObj.getPage_F("add-prereqs",res,"courses");
+});
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////POST REQUESTS/////////////////////////////////////
 //Post request to A Student
@@ -185,6 +205,52 @@ app.post("/addadvisors",(req,res)=>{
   //
   var record = req.body;
   sqlObj.addRec_F(record,"advisors",res);
+  //
+})
+//Post request for adding a New Course
+app.post("/addcourses",(req,res)=>{
+  if(req.body.course_id.length == 0){
+    console.log("Need Id");
+    res.render("add-courses.html",{message:"ID Needed",color:"red"});
+    return;
+  }
+  if(req.body.title.length == 0){
+    console.log("Need Name");
+    res.render("add-courses.html",{message:"Title needed",color:"red"});
+    return;
+  }
+  if(req.body.dept_name.length == 0){
+    console.log("Need Department Name");
+    res.render("add-courses.html",{message:"Department Needed",color:"red"});
+    return;
+  }
+  if(req.body.credits == 0){
+    console.log("Need Credits");
+    res.render("add-courses.html",{message:"Credits Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"courses",res);
+  //
+})
+//Post request for adding a Prereq Course
+app.post("/addprereqs",(req,res)=>{
+  if(req.body.course_id.length == 0){
+    console.log("Need Id");
+    res.render("add-prereqs.html",{message:"Course id Needed",color:"red"});
+    return;
+  }
+  if(req.body.prereq_id.length == 0){
+    console.log("Prereq Id Needed");
+    res.render("add-prereqs.html",{message:"Prereq Id Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"prereqs",res);
   //
 })
 ///////////////////////////////////////////////////////////////////////////////
