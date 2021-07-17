@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% set title = 'Timeslots'%}
+{% block content %}
+
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <form class="row g-3">
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-secondary mb-3">Confirm identity</button>
+            <button type="button" class="btn btn-success mb-3">
+              <a href="/add-timeslots">Add Timeslot</a>
+              </button>
+          </div>
+        </form>
+
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Time Slot Id</th>
+            <th scope="col">Day</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for timeslot in dataList %}
+            <tr>
+              <th scope="row">{{timeslot.time_slot_id}}</th>
+              <td>{{timeslot.day}}</td>
+              <td>{{timeslot.start_time}}</td>
+              <td>{{timeslot.end_time}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+{% endblock %}

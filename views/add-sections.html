@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% set title = 'New Section'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addsections" method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Course id</label>
+      <select class="form-select"  name="course_id">
+        {% for course in coursesList%}
+          <option value={{course.course_id}}>{{course.course_id}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Section Id</label>
+    <input
+      type="number"
+      name="sec_id"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Semester</label>
+    <input
+      type="number"
+      name="semester"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Year</label>
+    <input
+      type="number"
+      name="year"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Building</label>
+      <select class="form-select"  name="building">
+        {% for classroom in ClassroomsList %}
+          <option value={{classroom.building}}>{{classroomn.building}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Room Number</label>
+      <select class="form-select"  name="room_number">
+        {% for classroom in classroomsList %}
+          <option value={{classroom.room_number}}>{{classroomn.room_number}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/sections">Back</a></button>
+</form>
+
+{% endblock %}

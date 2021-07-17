@@ -225,8 +225,22 @@ class SQL_C {
     var checker;
     //Switch case for Selecting the correct SQL Statement for the correct Table
     switch (table) {
+      case "teaches":
+        checker = `SELECT * FROM ${table} WHERE id = ${record.id}
+        AND course_id = ${record.course_id} AND sec_id = ${record.sec_id}
+        AND semester = ${record.semester} AND year = ${record.year}`;
+        break;
+      case "sections":
+        checker = `SELECT * FROM ${table} WHERE course_id = ${record.course_id}
+        AND sec_id = ${record.sec_id} AND semester = ${record.semester} AND year = '${record.year}'`;
+        break;
+      case "takes":
+        checker = `SELECT * FROM ${table} WHERE id = ${record.id}
+        AND course_id = ${record.course_id} AND sec_id = '${record.sec_id}'`;
+        break;
       case "prereqs":
         checker = `SELECT * FROM ${table} WHERE course_id = '${record.course_id}'`;
+        break;
       case "courses":
         checker =`SELECT * FROM ${table} WHERE course_id = '${record.course_id}'`;
         break;
@@ -281,6 +295,21 @@ class SQL_C {
     //
     var query,query2;
     switch (page) {
+      case "add-sections":
+        var coursesList,classroomsList;
+        query = `SELECT * FROM courses`;
+        query2 = `SELECT * FROM classrooms`;
+        //SQL Query for getting the Courses List
+        this.con.query(query,(err,result)=>{
+          if(err) throw err;
+          coursesList = result;
+        });
+        //SQL Query for getting the Classrooms List
+        this.con.query(query2,(err,result)=>{
+          if(err) throw err;
+          res.render(`${page}.html`,{coursesList:coursesList,classroomsList:result})
+        });
+        break;
       case "add-advisors":
         var studentsList,instructorsList;
         query = `SELECT * FROM students`;

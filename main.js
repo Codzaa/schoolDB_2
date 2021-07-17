@@ -106,6 +106,56 @@ app.get("/add-prereqs",(req,res)=>{
   //Get The Add Prereqs Page
   sqlObj.getPage_F("add-prereqs",res,"courses");
 });
+//Get Request for all Sections
+app.get("/sections",(req,res)=>{
+  //Get All Sections from Database
+  sqlObj.getAllRec_F("sections",res);
+});
+//Get Request for the Add Sections Page
+app.get("/add-sections",(req,res)=>{
+  //Get The Add Sections Page
+  sqlObj.getPage_F("add-sections",res,"courses");
+});
+//Get Request for all Takes
+app.get("/takes",(req,res)=>{
+  //Get All Takes from Database
+  sqlObj.getAllRec_F("takes",res);
+});
+//Get Request for the Add Takes Page
+app.get("/add-takes",(req,res)=>{
+  //Get The Add Takes Page
+  sqlObj.getPage_F("add-takes",res,"sections");
+});
+//Get Request for all Classrooms
+app.get("/classrooms",(req,res)=>{
+  //Get All Classrooms from Database
+  sqlObj.getAllRec_F("classrooms",res);
+});
+//Get Request for the Add Classrooms Page
+app.get("/add-classrooms",(req,res)=>{
+  //Get The Add Classrooms Page
+  sqlObj.getPage_F("add-classrooms",res,"dummy");
+});
+//Get Request for the Add Time Slots Page
+app.get("/timeslots",(req,res)=>{
+  //Get All timeslots from Database
+  sqlObj.getAllRec_F("timeslots",res);
+});
+//Get Request for the Add timeslots Page
+app.get("/add-timeslots",(req,res)=>{
+  //Get The Add timeslots Page
+  sqlObj.getPage_F("add-timeslots",res,"dummy");
+});
+//Get Request for the Teaches
+app.get("/teaches",(req,res)=>{
+  //Get All Teaches from Database
+  sqlObj.getAllRec_F("teaches",res);
+});
+//Get Request for the Add Teaches Page
+app.get("/add-teaches",(req,res)=>{
+  //Get The Add Teaches Page
+  sqlObj.getPage_F("add-teaches",res,"sections");
+});
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////POST REQUESTS/////////////////////////////////////
 //Post request to A Student
@@ -235,7 +285,7 @@ app.post("/addcourses",(req,res)=>{
   sqlObj.addRec_F(record,"courses",res);
   //
 })
-//Post request for adding a Prereq Course
+//Post request for adding a a new Prereq
 app.post("/addprereqs",(req,res)=>{
   if(req.body.course_id.length == 0){
     console.log("Need Id");
@@ -253,19 +303,169 @@ app.post("/addprereqs",(req,res)=>{
   sqlObj.addRec_F(record,"prereqs",res);
   //
 })
-///////////////////////////////////////////////////////////////////////////////
-/*
-Functions and querying to be done:
-a) To list one student’s marks of all courses grouping by semester;
-b) To list all students’ marks about some course in the ascending or decreasing
-order. And each querying only lists the marks of students in one class;
-c) To compute the average marks of each course. And the average marks can be
-grouped by class;
-d) To count the number of courses that one student has learned, and compute his
-total credits;
-e) To query marks of one student about some course;
-f) To query courses that are taught by some teacher in one semester;
-g) To query courses that are taken by some class in one semester;
-h) Other possible functions and querying that you can imagine. And extra
-functions and querying will give you extra marks.
-*/
+//Post request for adding a new Take
+app.post("/addtakes",(req,res)=>{
+  if(req.body.id.length == 0){
+    console.log("Need Id");
+    res.render("add-takes.html",{message:"id Needed",color:"red"});
+    return;
+  }
+  if(req.body.course_id.length == 0){
+    console.log("Course Id Needed");
+    res.render("add-takes.html",{message:"Course Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.sec_id.length == 0){
+    console.log("Sec Id Needed");
+    res.render("add-takes.html",{message:"Sec Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.semester.length == 0){
+    console.log("semester Needed");
+    res.render("add-takes.html",{message:"Semester Needed",color:"red"});
+    return;
+  }
+  if(req.body.year.length == 0){
+    console.log("Year Needed");
+    res.render("add-takes.html",{message:"Year Needed",color:"red"});
+    return;
+  }
+  if(req.body.grade.length == 0){
+    console.log("Grade Needed");
+    res.render("add-takes.html",{message:"Grade Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"takes",res);
+  //
+})
+//Post request for Adding the Sections
+app.post("/addsections",(req,res)=>{
+  if(req.body.course_id.length == 0){
+    console.log("Course Id Needed");
+    res.render("add-sections.html",{message:"Course Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.sec_id.length == 0){
+    console.log("Sec Id Needed");
+    res.render("add-sections.html",{message:"Sec Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.semester.length == 0){
+    console.log("semester Needed");
+    res.render("add-sections.html",{message:"Semester Needed",color:"red"});
+    return;
+  }
+  if(req.body.year.length == 0){
+    console.log("Year Needed");
+    res.render("add-sections.html",{message:"Year Needed",color:"red"});
+    return;
+  }
+  if(req.body.building.length == 0){
+    console.log("Building Needed");
+    res.render("add-sections.html",{message:"building Needed",color:"red"});
+    return;
+  }
+  if(req.body.room_number.length == 0){
+    console.log("Room Number Needed");
+    res.render("add-sections.html",{message:"Room Number Needed",color:"red"});
+    return;
+  }
+  if(req.body.time_slot_id.length == 0){
+    console.log("Time Slot Needed");
+    res.render("add-sections.html",{message:"Time Slot Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"sections",res);
+  //
+})
+//Post request for Adding the Classrooms
+app.post("/addclassrooms",(req,res)=>{
+  if(req.body.building.length == 0){
+    console.log("Building Needed");
+    res.render("add-classrooms.html",{message:"Building",color:"red"});
+    return;
+  }
+  if(req.body.room_number.length == 0){
+    console.log("Room Number Needed");
+    res.render("add-classrooms.html",{message:"Room Number Needed",color:"red"});
+    return;
+  }
+  if(req.body.capacity.length == 0){
+    console.log("Capacity Needed");
+    res.render("add-classrooms.html",{message:"Capacity Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"classrooms",res);
+  //
+})
+//Post request for Adding the timeslots
+app.post("/addtimeslots",(req,res)=>{
+  if(req.body.time_slot_id.length == 0){
+    console.log("Time slot Id Needed");
+    res.render("add-timeslots.html",{message:"Time slot Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.day.length == 0){
+    console.log("Day Needed");
+    res.render("add-timeslots.html",{message:"Day Needed",color:"red"});
+    return;
+  }
+  if(req.body.start_time.length == 0){
+    console.log("Start Time Needed");
+    res.render("add-timeslots.html",{message:"Start Time Needed",color:"red"});
+    return;
+  }
+  if(req.body.end_time.length == 0){
+    console.log("End Time Needed");
+    res.render("add-timeslots.html",{message:"End Time Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"timeslots",res);
+  //
+})
+//Post request for Adding the Teaches
+app.post("/addteaches",(req,res)=>{
+  if(req.body.id.length == 0){
+    console.log("Id Needed");
+    res.render("add-teaches.html",{message:"ID Needed",color:"red"});
+    return;
+  }
+  if(req.body.course_id.length == 0){
+    console.log("Course Id Needed");
+    res.render("add-teaches.html",{message:"Course Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.sec_id.length == 0){
+    console.log("Section Id needed");
+    res.render("add-teaches.html",{message:"Section Id Needed",color:"red"});
+    return;
+  }
+  if(req.body.semester.length == 0){
+    console.log("Semester Needed");
+    res.render("add-teaches.html",{message:"Semester Needed",color:"red"});
+    return;
+  }
+  if(req.body.year.length == 0){
+    console.log("Year Needed");
+    res.render("add-teaches.html",{message:"Year Needed",color:"red"});
+    return;
+  }
+  //
+  //The data inside the request body is the record
+  var record = req.body;
+  sqlObj.addRec_F(record,"teaches",res);
+  //
+})
+////////////////////////////////////////////////////////////////////////////////

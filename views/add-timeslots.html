@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% set title = 'New Timeslot'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addtimeslots" method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">ID</label>
+    <input
+      type="number"
+      name="time_slot_id"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Day</label>
+    <input
+      type="text"
+      name="day"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Start Time</label>
+    <input
+      type="time"
+      name="start_time"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">End Time</label>
+    <input
+      type="time"
+      name="end_time"
+      class="form-control"
+      >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/timeslots">Back</a></button>
+</form>
+
+{% endblock %}

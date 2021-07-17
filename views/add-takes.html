@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% set title = 'New Take'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addtakes" method="post">
+  <div class="mb-3">
+    <label for="id" class="form-label">Id</label>
+    <input
+      type="number"
+      name="id"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Course id</label>
+      <select class="form-select"  name="course_id">
+        {% for section in dataList%}
+          <option value={{section.course_id}}>{{section.course_id}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Section id</label>
+      <select class="form-select"  name="sec_id">
+        {% for section in dataList%}
+          <option value={{section.sec_id}}>{{section.sec_id}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Semester</label>
+      <select class="form-select"  name="semester">
+        {% for section in dataList%}
+          <option value={{section.semester}}>{{section.semester}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Year</label>
+      <select class="form-select" name="year">
+        {% for section in dataList%}
+          <option value={{section.year}}>{{section.year}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Grade</label>
+    <input
+      type="number"
+      name="grade"
+      class="form-control"
+      >
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/takes">Back</a></button>
+</form>
+
+{% endblock %}

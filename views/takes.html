@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% set title = 'Takes'%}
+{% block content %}
+
+
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <form class="row g-3">
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-secondary mb-3">Confirm identity</button>
+            <button type="button" class="btn btn-success mb-3">
+              <a href="/add-takes">Add Take</a>
+              </button>
+          </div>
+        </form>
+
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Course Id</th>
+            <th scope="col">Section Id</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Year</th>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for take in dataList %}
+            <tr>
+              <th scope="row">{{take.id}}</th>
+              <td>{{take.course_id}}</td>
+              <td>{{take.sec_id}}</td>
+              <td>{{take.semester}}</td>
+              <td>{{take.year}}</td>
+              <td>{{take.grade}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+{% endblock %}

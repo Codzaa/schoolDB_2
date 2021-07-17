@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% set title = 'New Classroom'%}
+{% block content %}
+
+<h3 style="color:{{color}};">{{message}}</h3>
+<form action="/addclassrooms" method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Building</label>
+    <input
+      type="number"
+      name="building"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Room Number</label>
+    <input
+      type="number"
+      name="room_number"
+      class="form-control"
+      >
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Capacity</label>
+    <input
+      type="number"
+      name="capacity"
+      class="form-control"
+      >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-primary"><a href="/classrooms">Back</a></button>
+</form>
+
+{% endblock %}
