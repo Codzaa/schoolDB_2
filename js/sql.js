@@ -279,6 +279,28 @@ class SQL_C {
       }
     });
   }
+  //Functions and Exercises
+  getAllRec_F2(table,v,res){
+    var sqlQuery,page;
+    switch (table) {
+      case "function-a1":
+        sqlQuery = `SELECT * FROM takes GROUP BY semester`;
+        page = "function-a";
+        break;
+      case "function-a2":
+        sqlQuery = `SELECT * FROM takes WHERE id = ${v} GROUP BY semester`;
+        page = "function-a";
+        break;
+      default:
+    }
+    this.con.query(sqlQuery,(err,result)=>{
+      if(err) throw err;
+      //Store the list of records
+      let records = result;
+      //Response header containing the HTML page and Data to be shown on that page
+        res.render(`${page}.html`,{dataList:records});
+    });
+  }
   //Get All Records
   getAllRec_F(table,res){
     let sqlQuery = `SELECT * FROM ${table}`;

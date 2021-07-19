@@ -1,14 +1,7 @@
 ///////////////////////////////////// TODO: ///////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 /*
-1.Takes
-2.Sections
-3.Time Slots
-4.Classrooms
-5.Teaches
-///////////////////////////////////////////////////////////////////////////////
 Functions and querying to be done:
-a) To list one student’s marks of all courses grouping by semester;
+a) To list one student’s marks of all courses grouping by semester;(Takes Table)
 b) To list all students’ marks about some course in the ascending or decreasing
 order. And each querying only lists the marks of students in one class;
 c) To compute the average marks of each course. And the average marks can be
