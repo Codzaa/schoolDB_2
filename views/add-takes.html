@@ -5,12 +5,12 @@
 <h3 style="color:{{color}};">{{message}}</h3>
 <form action="/addtakes" method="post">
   <div class="mb-3">
-    <label for="id" class="form-label">Id</label>
-    <input
-      type="number"
-      name="id"
-      class="form-control"
-      >
+    <label for="name" class="form-label">Student id</label>
+      <select class="form-select"  name="id">
+        {% for student in studentsList%}
+          <option value={{student.id}}>{{student.id}}</option>
+        {% endfor %}
+      </select>
   </div>
   <div class="mb-3">
     <label for="name" class="form-label">Course id</label>

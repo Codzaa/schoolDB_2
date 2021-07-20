@@ -50,6 +50,10 @@ app.get("/function-a",(req,res)=>{
   //
   sqlObj.getAllRec_F2("function-a1","value",res);
 });
+app.get("/function-b",(req,res)=>{
+  //
+  sqlObj.getAllRec_F2("function-b","value",res);
+});
 /////////////////////////////GET REQUESTS/////////////////////////////////////
 //Get Request for all Students
 app.get("/students",(req,res)=>{
@@ -163,6 +167,20 @@ app.get("/add-teaches",(req,res)=>{
 });
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////POST REQUESTS/////////////////////////////////////
+//
+app.post("/function-b2",(req,res)=>{
+    //
+    if(req.body.order.length == 0){
+      console.log("Order needed");
+      res.render("function-b.html",{message:"Order Needed",color:"red"});
+      return;
+    }
+    //The data inside the request body is the record
+    var record = req.body;
+    sqlObj.getAllRec_F2("function-b2",record,res);
+    //
+});
+//
 app.post("/function-a2",(req,res)=>{
     //
     if(req.body.id.length == 0){

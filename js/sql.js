@@ -225,14 +225,21 @@ class SQL_C {
     var checker;
     //Switch case for Selecting the correct SQL Statement for the correct Table
     switch (table) {
+      case "timeslots":
+        checker = `SELECT * FROM ${table} WHERE time_slot_id = '${record.time_slot_id}'`;
+        break;
+      case "classrooms":
+        checker = `SELECT * FROM ${table} WHERE building = '${record.building}'
+        AND room_number = '${record.room_number}'`;
+        break;
       case "teaches":
         checker = `SELECT * FROM ${table} WHERE id = ${record.id}
         AND course_id = ${record.course_id} AND sec_id = ${record.sec_id}
         AND semester = ${record.semester} AND year = ${record.year}`;
         break;
       case "sections":
-        checker = `SELECT * FROM ${table} WHERE course_id = ${record.course_id}
-        AND sec_id = ${record.sec_id} AND semester = ${record.semester} AND year = '${record.year}'`;
+        checker = `SELECT * FROM ${table} WHERE course_id = '${record.course_id}'
+        AND sec_id = '${record.sec_id}' AND semester = '${record.semester}' AND year = '${record.year}'`;
         break;
       case "takes":
         checker = `SELECT * FROM ${table} WHERE id = ${record.id}
@@ -284,12 +291,16 @@ class SQL_C {
     var sqlQuery,page;
     switch (table) {
       case "function-a1":
-        sqlQuery = `SELECT * FROM takes GROUP BY semester`;
+        sqlQuery = `SELECT * FROM takes`;
         page = "function-a";
         break;
       case "function-a2":
-        sqlQuery = `SELECT * FROM takes WHERE id = ${v} GROUP BY semester`;
+        sqlQuery = `SELECT * FROM takes WHERE id = '${v.id}' GROUP BY semester`;
         page = "function-a";
+        break;
+      case "function-b":
+        sqlQuery = `SELECT * FROM takes`;
+        page = "function-b";
         break;
       default:
     }
@@ -298,7 +309,8 @@ class SQL_C {
       //Store the list of records
       let records = result;
       //Response header containing the HTML page and Data to be shown on that page
-        res.render(`${page}.html`,{dataList:records});
+      res.render(`${page}.html`,{dataList:records});
+      console.log(result);
     });
   }
   //Get All Records
@@ -315,12 +327,30 @@ class SQL_C {
   //Get Page
   getPage_F(page,res,table){
     //
-    var query,query2;
+    var query,query2,query3;
     switch (page) {
+      case "add-takes":
+        var dataList,studentsList;
+        query = `SELECT * FROM ${table}`;
+        query2 = `SELECT * FROM students`;
+        this.con.query(query,(err,result)=>{
+          if(err) throw err;
+          //res.render(`${page}.html`,{dataList:result});
+          dataList = result;
+        });
+        //
+        this.con.query(query2,(err,result)=>{
+          if(err) throw err;
+          //
+          res.render(`${page}.html`,{dataList:dataList,studentsList:result})
+        });
+
+        break;
       case "add-sections":
-        var coursesList,classroomsList;
+        var coursesList,classroomsList,timesList;
         query = `SELECT * FROM courses`;
         query2 = `SELECT * FROM classrooms`;
+        query3 = `SELECT * FROM timeslots`;
         //SQL Query for getting the Courses List
         this.con.query(query,(err,result)=>{
           if(err) throw err;
@@ -329,8 +359,16 @@ class SQL_C {
         //SQL Query for getting the Classrooms List
         this.con.query(query2,(err,result)=>{
           if(err) throw err;
-          res.render(`${page}.html`,{coursesList:coursesList,classroomsList:result})
+          classroomsList = result;
+          //res.render(`${page}.html`,{coursesList:coursesList,classroomsList:result})
         });
+        //SQL Query for getting the Time slots List
+        this.con.query(query3,(err,result)=>{
+          if(err) throw err;
+          //timesList = result;
+          res.render(`${page}.html`,{coursesList:coursesList,classroomsList:classroomsList,timesList:result})
+          console.log(result)
+        })
         break;
       case "add-advisors":
         var studentsList,instructorsList;

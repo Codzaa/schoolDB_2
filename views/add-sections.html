@@ -23,7 +23,7 @@
   <div class="mb-3">
     <label for="name" class="form-label">Semester</label>
     <input
-      type="number"
+      type="text"
       name="semester"
       class="form-control"
       >
@@ -39,8 +39,8 @@
   <div class="mb-3">
     <label for="name" class="form-label">Building</label>
       <select class="form-select"  name="building">
-        {% for classroom in ClassroomsList %}
-          <option value={{classroom.building}}>{{classroomn.building}}</option>
+        {% for classroom in classroomsList %}
+          <option value={{classroom.building}}>{{classroom.building}}</option>
         {% endfor %}
       </select>
   </div>
@@ -48,7 +48,15 @@
     <label for="name" class="form-label">Room Number</label>
       <select class="form-select"  name="room_number">
         {% for classroom in classroomsList %}
-          <option value={{classroom.room_number}}>{{classroomn.room_number}}</option>
+          <option value={{classroom.room_number}}>{{classroom.room_number}}</option>
+        {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Time Slot</label>
+      <select class="form-select"  name="time_slot_id">
+        {% for timeslot in timesList %}
+          <option value={{timeslot.time_slot_id}}>{{timeslot.time_slot_id}}</option>
         {% endfor %}
       </select>
   </div>
