@@ -302,6 +302,38 @@ class SQL_C {
         sqlQuery = `SELECT * FROM takes`;
         page = "function-b";
         break;
+      case "function-b2":
+        sqlQuery = `SELECT * FROM takes ORDER BY grade ${v.order}`;
+        page = "function-b";
+        break;
+      case "function-c":
+        sqlQuery = `SELECT * FROM takes`;
+        page = "function-c";
+        break;
+      case "function-c2":
+        sqlQuery = `SELECT AVG(grade) AS AverageMark FROM takes WHERE course_id = '${v.course_id}' GROUP BY sec_id`;
+        page = "function-c";
+        break;
+      case "function-d":
+        sqlQuery = `SELECT COUNT(id) AS NoStudents FROM takes WHERE ;`
+        page = "function-d";
+        //WHERE amount = (SELECT MAX(amount) FROM payments);
+        break;
+      case "function-e":
+        sqlQuery = `SELECT * FROM takes`;
+        page = "function-e"
+        break;
+      case "function-e2":
+        sqlQuery = `SELECT grade FROM (SELECT * FROM takes WHERE id = '${v.id}') AS T`;
+        page = "function-e";
+        break;
+      case "function-f":
+        sqlQuery = `SELECT * FROM teaches`;
+        page = "function-f";
+        break;
+      case "function-f2":
+        sqlQuery = `SELECT title FROM (SELECT * FROM teaches WHERE id = '${v.id}') AS T`;
+        break;
       default:
     }
     this.con.query(sqlQuery,(err,result)=>{

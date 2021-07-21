@@ -54,6 +54,18 @@ app.get("/function-b",(req,res)=>{
   //
   sqlObj.getAllRec_F2("function-b","value",res);
 });
+app.get("/function-c",(req,res)=>{
+  //
+  sqlObj.getAllRec_F2("function-c","value",res);
+});
+app.get("/function-d",(req,res)=>{
+  //
+  sqlObj.getAllRec_F2("function-d","value",res);
+});
+app.get("/function-e",(req,res)=>{
+  //
+  sqlObj.getAllRec_F2("function-e","value",res);
+});
 /////////////////////////////GET REQUESTS/////////////////////////////////////
 //Get Request for all Students
 app.get("/students",(req,res)=>{
@@ -168,6 +180,30 @@ app.get("/add-teaches",(req,res)=>{
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////POST REQUESTS/////////////////////////////////////
 //
+app.post("/function-e2",(req,res)=>{
+    //
+    if(req.body.id.length == 0){
+      console.log("ID Needed");
+      res.render("function-e.html",{message:"ID Needed",color:"red"});
+      return;
+    }
+    //The data inside the request body is the record
+    var record = req.body;
+    sqlObj.getAllRec_F2("function-e2",record,res);
+    //
+});
+app.post("/function-c2",(req,res)=>{
+    //
+    if(req.body.course_id.length == 0){
+      console.log("Course ID Needed");
+      res.render("function-c.html",{message:"Course Needed",color:"red"});
+      return;
+    }
+    //The data inside the request body is the record
+    var record = req.body;
+    sqlObj.getAllRec_F2("function-c2",record,res);
+    //
+});
 app.post("/function-b2",(req,res)=>{
     //
     if(req.body.order.length == 0){

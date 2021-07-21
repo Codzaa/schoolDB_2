@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% set title = 'Function(e)'%}
+{% block content %}
+
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <form class="row g-3" action="/function-e2" method="post">
+          <div class="col-auto">
+            <select class="form-select" name="id">
+              {% for take in dataList%}
+                <option value="{{take.id}}">{{take.id}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </form>
+
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Student Id</th>
+            <th scope="col">Course Id</th>
+            <th scope="col">Section Id</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Year</th>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in dataList %}
+            <tr>
+              <td>{{course.course_id}}</td>
+              <td>{{course.sec_id}}</td>
+              <td>{{course.semester}}</td>
+              <td>{{course.year}}</td>
+              <td>{{course.grade}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in dataList %}
+            <tr>
+              <td>{{course.grade}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+{% endblock %}
